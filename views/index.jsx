@@ -29,9 +29,27 @@ import React from 'react';
     }
 
     class Todo extends React.Component {
+        //this.state.checked = false
+        constructor(props){
+            super(props)
+            this.state = {
+                checked : false
+            }
+        }
+
+        handleChange(){
+            console.log('as')
+            this.setState({
+                checked : !this.state.checked
+            })
+        }
+
         render(){
             return(
                 <tr>
+                    <td style={{ border : "1px solid black" }}>
+                        <input type="checkbox" checked={ this.state.checked } onChange={ this.handleChange.bind(this) }/>
+                    </td>
                     <td style={{ border : "1px solid black" }}>{ this.props.title }</td>
                     <td style={{ border : "1px solid black" }}>{ this.props.children }</td>
                 </tr>
@@ -40,7 +58,7 @@ import React from 'react';
     }
 
     Todo.propTypes = {
-        title: React.PropTypes.number.isRequired
+        title: React.PropTypes.string.isRequired
     };
     
     class TodoForm extends React.Component {
